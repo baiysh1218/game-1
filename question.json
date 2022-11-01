@@ -1,0 +1,14 @@
+{
+  "quistion": [
+    {
+      "question": "promise",
+      "answer": "asynchrony",
+      "id": 2
+    },
+    {
+      "question": "123",
+      "answer": "123",
+      "id": 3
+    }
+  ]
+}
