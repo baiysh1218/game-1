@@ -14,26 +14,31 @@ const QuestionRandom = ({ props }) => {
     for (let i = 0; i < answer.length; i++) {
       for (let j = 0; j < answerToQuestion.length; j++) {
         if (answer[i].toUpperCase() === answerToQuestion[j].toUpperCase()) {
-          var res = "ответ верный";
+          var res = "Ответ правильный!";
         }
       }
     }
-    console.log(res);
+    alert(res);
   }
+
   function handleSave2() {
     if (one > 1) {
       alert("вводите только одну букву");
     }
     for (let i = 0; i < answer.length; i++) {
       if (answer[i] === one) {
-        alert(answer[i]);
-      }
-      if (answer !== one) {
-        var res = "Не правильная буква";
+        var res = "ответ правильный!";
+      } else if (answer[i] !== one) {
+        var res2 = "Не правильная буква";
       }
     }
-    alert(res);
+    if (res) {
+      alert(res);
+    } else {
+      alert(res2);
+    }
   }
+
   return (
     <div>
       <div className="modal-question">
