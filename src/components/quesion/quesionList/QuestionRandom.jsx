@@ -30,24 +30,33 @@ const QuestionRandom = ({ props }) => {
 
     answerArray.map((item, index) => {
       if (answer[index] === one) {
-        return (answerArray[index] = one);
+        answerArray[index] = one;
+        // return (answerArray[index] = one);
       } else {
         return item;
       }
     });
 
+    // answerArray.reduce((acc, prev, index) => {
+    //   // console.log(acc, "acc");
+    //   console.log(prev, "prev");
+    //   // console.log(index, "index");
+    // });
+
     setOne("");
   }
-  console.log(answerArray);
+
+  // console.log(answerArray);
 
   return (
     <div>
       <div className="modal-question">
         <h2>{answerArray}</h2>
-        <h2>{answer.length}</h2>
 
-        {answer.toUpperCase() === answerToQuestion.toUpperCase() ? (
-          <div>правильное слово</div>
+        <h2>длинна ответа {answer.length}</h2>
+
+        {answerToQuestion.length > 0 ? (
+          <div>проверьте слово)</div>
         ) : (
           <div>Ждём праивльного ответа!</div>
         )}
@@ -64,7 +73,7 @@ const QuestionRandom = ({ props }) => {
         />
         {one.length === 0 ? (
           <Button
-            // onClick={() => handleSave2()}
+            onClick={() => handleSave2()}
             variant="contained"
             disabled
             color="error"
