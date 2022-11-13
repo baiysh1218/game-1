@@ -31,7 +31,6 @@ const QuesionContextProvider = ({ children }) => {
 
   async function getQiestion() {
     const response = await axios(API);
-    // console.log(response);
     dispatch({
       type: "GET_QUESTION",
       payload: response,
@@ -55,8 +54,6 @@ const QuesionContextProvider = ({ children }) => {
     await axios.patch(`${API}/${id}`, editObj);
     getQiestion();
   }
-
-  // console.log(state.question);
 
   return (
     <quesionContext.Provider

@@ -1,65 +1,120 @@
 import { type } from "@testing-library/user-event/dist/type";
-import React, { useState } from "react";
+import React, { useCallback, useState, useContext } from "react";
+
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import CropSquareIcon from "@mui/icons-material/CropSquare";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import Swal from "sweetalert2";
+
 import "./Question.css";
+import { quesionContext } from "../../../Context/QuesionContext";
 
 const QuestionRandom = ({ props }) => {
+  const { getQiestion } = useContext(quesionContext);
   const [answerToQuestion, setAnswerToQuestion] = useState("");
   const [one, setOne] = useState("");
   const [answerArray, setAnswerArray] = useState([]);
-  // console.log(answerArray);
 
   let answer = props.answer;
 
-  // function handleSave1() {
-  //   for (let i = 0; i < answer.length; i++) {
-  //     for (let j = 0; j < answerToQuestion.length; j++) {
-  //       if (answer[i].toUpperCase() === answerToQuestion[j].toUpperCase()) {
-  //         var res = "Ответ правильный!";
-  //       }
-  //     }
-  //   }
-  //   alert(res);
-  // }
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: toast => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+
+  function updateQuestion() {
+    getQiestion();
+    setAnswerArray([]);
+    setOne("");
+    setAnswerToQuestion("");
+  }
 
   function handleSave2() {
-    for (let i = 0; i < answer.length; i++) {
-      answerArray[i] = "_";
+    if (answerArray.length === 0) {
+      for (let i = 0; i < answer.length; i++) {
+        answerArray[i] = "▩";
+      }
+    }
+
+    if (answer.search(one)) {
+      Toast.fire({
+        icon: "error",
+        title: "К сожедению буква не совподает",
+      });
     }
 
     answerArray.map((item, index) => {
       if (answer[index] === one) {
-        answerArray[index] = one;
-        // return (answerArray[index] = one);
-      } else {
-        return item;
+        if (answer[index] === answerArray[index]) {
+          Toast.fire({
+            icon: "warning",
+            title: "Жаль! Но эту букву вы уже отгадали",
+          });
+        } else {
+          answerArray[index] = one;
+          Toast.fire({
+            icon: "success",
+            title: "Отлично! Вы отгадали букву",
+          });
+        }
       }
     });
 
-    // answerArray.reduce((acc, prev, index) => {
-    //   // console.log(acc, "acc");
-    //   console.log(prev, "prev");
-    //   // console.log(index, "index");
-    // });
+    if (
+      answerArray.toString().toUpperCase() ===
+      answer.split("").toString().toUpperCase()
+    ) {
+      Swal.fire("Отличная работа!", "Нажмите на кнопку", "success");
+      getQiestion();
+    }
 
     setOne("");
   }
 
-  // console.log(answerArray);
+  function handleSave1() {
+    if (answer === answerToQuestion) {
+      Swal.fire("Отличная работа!", "Нажмите на кнопку", "success");
+      getQiestion();
+    }
+    if (answer.search(answerToQuestion)) {
+      Swal.fire(
+        "К сожелению не правильное слово",
+        "Нажмите на кнопку",
+        "error"
+      );
+    }
+
+    setAnswerToQuestion("");
+  }
 
   return (
     <div>
       <div className="modal-question">
-        <h2>{answerArray}</h2>
+        <div className="question-block-answer-length">
+          <h2>{answerArray}</h2>
 
-        <h2>длинна ответа {answer.length}</h2>
+          <h4>{answer.length} букв</h4>
+        </div>
 
-        {answerToQuestion.length > 0 ? (
-          <div>проверьте слово)</div>
-        ) : (
-          <div>Ждём праивльного ответа!</div>
-        )}
+        <Button
+          onClick={() => {
+            updateQuestion();
+          }}
+          style={{
+            marginTop: "15px",
+          }}
+          color="success">
+          следующий вопрос
+        </Button>
 
         <TextField
           id="outlined-search"
@@ -71,12 +126,10 @@ const QuestionRandom = ({ props }) => {
           value={one}
           onChange={e => setOne(e.target.value)}
         />
-        {one.length === 0 ? (
+        {one.length === 0 || one.length > 1 ? (
           <Button
             onClick={() => handleSave2()}
-            variant="contained"
             disabled
-            color="error"
             style={{
               marginTop: "15px",
             }}>
@@ -84,7 +137,10 @@ const QuestionRandom = ({ props }) => {
           </Button>
         ) : (
           <Button
-            onClick={() => handleSave2()}
+            onClick={() => {
+              handleSave2();
+            }}
+            className="button"
             variant="contained"
             color="success"
             style={{
@@ -97,7 +153,7 @@ const QuestionRandom = ({ props }) => {
       <div className="modal-question">
         <TextField
           id="outlined-search"
-          label="Введите слово"
+          label="Введите слово целиком"
           type="search"
           style={{
             marginTop: "15px",
@@ -105,12 +161,10 @@ const QuestionRandom = ({ props }) => {
           value={answerToQuestion}
           onChange={e => setAnswerToQuestion(e.target.value)}
         />
-        {answerToQuestion.length === 0 ? (
+        {answerToQuestion.length === 0 ||
+        answerToQuestion.length > answer.length ? (
           <Button
-            // onClick={() => handleSave1()}
-            variant="contained"
             disabled
-            color="error"
             style={{
               marginTop: "15px",
             }}>
@@ -118,7 +172,7 @@ const QuestionRandom = ({ props }) => {
           </Button>
         ) : (
           <Button
-            // onClick={() => handleSave1()}
+            onClick={() => handleSave1()}
             variant="contained"
             color="success"
             style={{

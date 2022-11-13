@@ -1,12 +1,16 @@
 import { QuestionAnswer } from "@mui/icons-material";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import { Button } from "@mui/material";
+
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { useMemo } from "react";
-import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { quesionContext } from "../../../Context/QuesionContext";
 import QuestionRandom from "./QuestionRandom";
 
 const QuesionList = () => {
   const { getQiestion, question } = useContext(quesionContext);
+  const navigate = useNavigate();
 
   function arrayRandElement(arr) {
     let rand = Math.floor(Math.random() * arr.length);
@@ -21,6 +25,14 @@ const QuesionList = () => {
 
   return (
     <div className="que-list">
+      <div className="icon-button-info">
+        <Button
+          onClick={() => {
+            navigate("/game-info");
+          }}>
+          <InfoOutlinedIcon />
+        </Button>
+      </div>
       <h1 className="que-h1">{random.question}</h1>
       <QuestionRandom props={random} />
     </div>
