@@ -45,7 +45,7 @@ const QuestionRandom = ({ props }) => {
       }
     }
 
-    if (answer.search(one)) {
+    if (answer.toUpperCase().search(one.toUpperCase())) {
       Toast.fire({
         icon: "error",
         title: "К сожедению буква не совподает",
@@ -53,8 +53,8 @@ const QuestionRandom = ({ props }) => {
     }
 
     answerArray.map((item, index) => {
-      if (answer[index] === one) {
-        if (answer[index] === answerArray[index]) {
+      if (answer[index].toUpperCase() === one.toUpperCase()) {
+        if (answer[index].toUpperCase() === answerArray[index].toUpperCase()) {
           Toast.fire({
             icon: "warning",
             title: "Жаль! Но эту букву вы уже отгадали",
@@ -75,17 +75,19 @@ const QuestionRandom = ({ props }) => {
     ) {
       Swal.fire("Отличная работа!", "Нажмите на кнопку", "success");
       getQiestion();
+      setAnswerArray([]);
     }
 
     setOne("");
   }
 
   function handleSave1() {
-    if (answer === answerToQuestion) {
+    if (answer.toUpperCase() === answerToQuestion.toUpperCase()) {
       Swal.fire("Отличная работа!", "Нажмите на кнопку", "success");
       getQiestion();
+      setAnswerArray([]);
     }
-    if (answer.search(answerToQuestion)) {
+    if (answer.toUpperCase().search(answerToQuestion.toUpperCase())) {
       Swal.fire(
         "К сожелению не правильное слово",
         "Нажмите на кнопку",
