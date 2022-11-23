@@ -6,12 +6,19 @@ import { signInWithGoole } from "./Firebase";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/system";
 import MenuIcon from "@mui/icons-material/Menu";
+import { Avatar } from "@mui/material";
 
 export default function BasicMenu({ theme, setTheme }) {
   function changeTheme() {
     if (theme === "light") {
+      localStorage.setItem("theme", theme);
       setTheme("dark");
-    } else {
+    }
+    if (theme === "dark") {
+      if (localStorage.getItem("theme")) {
+        localStorage.removeItem("theme");
+      }
+      localStorage.setItem("theme", theme);
       setTheme("light");
     }
   }
@@ -43,7 +50,14 @@ export default function BasicMenu({ theme, setTheme }) {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}>
-        <MenuIcon />
+        {name ? (
+          <div className="avatar-block">
+            <Avatar src={imgProfile} />
+            <span className="span-avatar">{name}</span>
+          </div>
+        ) : (
+          <Avatar src="/broken-image.jpg" />
+        )}
       </Button>
 
       <Menu
@@ -69,13 +83,16 @@ export default function BasicMenu({ theme, setTheme }) {
             Войти
           </MenuItem>
         )}
-
-        <MenuItem
-          onClick={() => {
-            navigate("/my-profile");
-          }}>
-          Мой Аккаунт
-        </MenuItem>
+        {name ? (
+          <MenuItem
+            onClick={() => {
+              navigate("/my-profile");
+            }}>
+            Мой Аккаунт
+          </MenuItem>
+        ) : (
+          ""
+        )}
 
         <MenuItem
           onClick={() => {

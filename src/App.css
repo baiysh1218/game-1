@@ -76,4 +76,12 @@
 #basic-button {
   display: flex;
   justify-content: start;
+  margin-top: 1%;
+  margin-left: 1%;
+}
+.span-avatar {
+  margin-left: 1%;
+}
+.avatar-block {
+  display: flex;
 }

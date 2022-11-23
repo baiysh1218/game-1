@@ -9,10 +9,12 @@ import Header from "./components/Header/Header";
 
 const App = () => {
   const [theme, setTheme] = useState("light");
+  const them = localStorage.getItem("theme");
+  // console.log(them);
 
   const darkTheme = createTheme({
     palette: {
-      mode: theme,
+      mode: them,
     },
   });
 

@@ -17,6 +17,8 @@ const QuestionRandom = ({ props }) => {
   const [one, setOne] = useState("");
   const [answerArray, setAnswerArray] = useState([]);
 
+  const name = localStorage.getItem("name");
+
   let answer = props.answer;
 
   const Toast = Swal.mixin({
