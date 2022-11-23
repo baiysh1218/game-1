@@ -1,5 +1,5 @@
 import { type } from "@testing-library/user-event/dist/type";
-import React, { useCallback, useState, useContext } from "react";
+import React, { useCallback, useState, useContext, useEffect } from "react";
 
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -73,7 +73,7 @@ const QuestionRandom = ({ props }) => {
       answerArray.toString().toUpperCase() ===
       answer.split("").toString().toUpperCase()
     ) {
-      Swal.fire("Отличная работа!", "Нажмите на кнопку", "success");
+      Swal.fire(`Отличная работа!`, `правильное слово ${answer}`, "success");
       getQiestion();
       setAnswerArray([]);
     }
@@ -83,7 +83,7 @@ const QuestionRandom = ({ props }) => {
 
   function handleSave1() {
     if (answer.toUpperCase() === answerToQuestion.toUpperCase()) {
-      Swal.fire("Отличная работа!", "Нажмите на кнопку", "success");
+      Swal.fire(`Отличная работа!`, `правильное слово ${answer}`, "success");
       getQiestion();
       setAnswerArray([]);
     }
@@ -102,8 +102,7 @@ const QuestionRandom = ({ props }) => {
     <div>
       <div className="modal-question">
         <div className="question-block-answer-length">
-          <h2>{answerArray}</h2>
-
+          <h2 className="question-array">{answerArray}</h2>
           <h4>{answer.length} букв</h4>
         </div>
 

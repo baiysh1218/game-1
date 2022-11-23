@@ -1,4 +1,4 @@
-import { Card, Paper } from "@mui/material";
+import { Button, Card, Paper } from "@mui/material";
 import React, { useContext } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,18 +15,27 @@ const Viev = () => {
       {question.map(item => (
         <div key={item.id} className="card-cild-block">
           <div className="card-content">
-            <span>Вопрос: {item.question} </span>
+            <h4>Вопрос: {item.question} </h4>
             <span>Ответ: {item.answer}</span>
           </div>
-          <button
-            onClick={() => {
-              deleteQuestion(item.id);
-            }}>
-            Удалить
-          </button>
-          <button onClick={() => navigate(`/editQuestion/${item.id}`)}>
-            Изменить
-          </button>
+          <div className="btn-viev">
+            <Button
+              variant="contained"
+              color="success"
+              className="btn-vuvu"
+              onClick={() => {
+                deleteQuestion(item.id);
+              }}>
+              Удалить
+            </Button>
+            <Button
+              variant="contained"
+              color="success"
+              className="btn-vuvu"
+              onClick={() => navigate(`/editQuestion/${item.id}`)}>
+              Изменить
+            </Button>
+          </div>
         </div>
       ))}
     </div>
