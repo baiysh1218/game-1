@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import "./App.css";
-import { BrowserRouter, useParams } from "react-router-dom";
+import { BrowserRouter, useNavigate, useParams } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import QuesionContextProvider from "./Context/QuesionContext";
 import Routing from "./Routing";
 import Header from "./components/Header/Header";
+import Welcome from "./components/Welcome/Welcome";
+import { Button } from "@mui/material";
 
 const App = () => {
   const [theme, setTheme] = useState("light");
-  const them = localStorage.getItem("theme");
+  const email = localStorage.getItem("email");
 
   const darkTheme = createTheme({
     palette: {
-      mode: them,
+      mode: theme,
     },
   });
 

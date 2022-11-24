@@ -23,7 +23,13 @@ const Profile = () => {
           <h3 className="profile-name">{name}</h3>
           <span className="a">{email}</span>
 
-          <Button onClick={() => logOut()}>Выйти с аккаунта</Button>
+          <Button
+            onClick={() => {
+              logOut();
+              navigate("/Allquestions");
+            }}>
+            Выйти с аккаунта
+          </Button>
           <Button onClick={() => navigate("/Allquestions")}>Назад</Button>
         </div>
       </div>

@@ -11,14 +11,9 @@ import { Avatar } from "@mui/material";
 export default function BasicMenu({ theme, setTheme }) {
   function changeTheme() {
     if (theme === "light") {
-      localStorage.setItem("theme", theme);
       setTheme("dark");
     }
     if (theme === "dark") {
-      if (localStorage.getItem("theme")) {
-        localStorage.removeItem("theme");
-      }
-      localStorage.setItem("theme", theme);
       setTheme("light");
     }
   }
