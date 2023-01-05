@@ -73,7 +73,8 @@ export default function BasicMenu({ theme, setTheme }) {
         ) : (
           <MenuItem
             onClick={() => {
-              signInWithGoole();
+              // signInWithGoole();
+              navigate("/Login");
             }}>
             Войти
           </MenuItem>

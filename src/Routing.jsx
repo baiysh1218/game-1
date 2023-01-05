@@ -6,6 +6,7 @@ import QuesionList from "./components/quesion/quesionList/QuesionList";
 import Edit from "./components/quesion/vievQuestions/Edit";
 import Viev from "./components/quesion/vievQuestions/Viev";
 import Welcome from "./components/Welcome/Welcome";
+import Login from "./components/Login/Login";
 
 const Routing = ({ theme, setTheme }) => {
   return (
@@ -16,6 +17,7 @@ const Routing = ({ theme, setTheme }) => {
       <Route path="/vievQuestion" element={<Viev />} />
       <Route path="/My-Profile" element={<Profile />} />
       <Route path="/editQuestion/:id" element={<Edit />} />
+      <Route path="/Login" element={<Login />} />
     </Routes>
   );
 };
