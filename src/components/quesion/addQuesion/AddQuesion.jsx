@@ -8,10 +8,12 @@ import { quesionContext } from "../../../Context/QuesionContext";
 import Viev from "../vievQuestions/Viev";
 
 const AddQuesion = () => {
-  const { createQuestion } = useContext(quesionContext);
+  const { createQuestion, deleteQuestion } = useContext(quesionContext);
   const navigate = useNavigate();
   const [question, setQuesion] = useState("");
   const [answer, setAnswer] = useState("");
+
+  const [allQ, setAllQ] = useState([]);
 
   function handleSave() {
     let newQuestion = {
@@ -25,6 +27,8 @@ const AddQuesion = () => {
       navigate("/Allquestions");
     }
   }
+
+  const newQuestion = { question: question, answer: answer };
 
   return (
     <Box
@@ -71,7 +75,10 @@ const AddQuesion = () => {
             }}
           />
           <Button
-            onClick={() => handleSave()}
+            // onClick={() => createQuestion()}
+            onClick={() => {
+              createQuestion(newQuestion);
+            }}
             variant="contained"
             color="success"
             style={{

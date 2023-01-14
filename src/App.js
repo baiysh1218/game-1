@@ -13,6 +13,8 @@ const App = () => {
   const [theme, setTheme] = useState("light");
   const email = localStorage.getItem("email");
 
+  // const sessionTheme = sessionStorage.getItem("theme");
+
   const darkTheme = createTheme({
     palette: {
       mode: theme,
@@ -24,7 +26,7 @@ const App = () => {
       <BrowserRouter>
         <ThemeProvider theme={darkTheme}>
           <CssBaseline />
-          {email ? <Header theme={theme} setTheme={setTheme} /> : ""}
+          {<Welcome /> ? <Header theme={theme} setTheme={setTheme} /> : ""}
           <Routing />
         </ThemeProvider>
       </BrowserRouter>

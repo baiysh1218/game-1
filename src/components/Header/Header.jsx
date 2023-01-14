@@ -2,7 +2,7 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { signInWithGoole } from "./Firebase";
+import { signInWithGitHub, signInWithGoole } from "./Firebase";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/system";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -12,9 +12,11 @@ export default function BasicMenu({ theme, setTheme }) {
   function changeTheme() {
     if (theme === "light") {
       setTheme("dark");
+      // sessionStorage.setItem("theme", "dark");
     }
     if (theme === "dark") {
       setTheme("light");
+      // sessionStorage.setItem("theme", "light");
     }
   }
 
@@ -36,6 +38,8 @@ export default function BasicMenu({ theme, setTheme }) {
   const imgProfile = localStorage.getItem("profilePic");
   const name = localStorage.getItem("name");
   const email = localStorage.getItem("email");
+
+  const point = sessionStorage.getItem("point");
 
   return (
     <div>
@@ -73,7 +77,6 @@ export default function BasicMenu({ theme, setTheme }) {
         ) : (
           <MenuItem
             onClick={() => {
-              // signInWithGoole();
               navigate("/Login");
             }}>
             Войти
@@ -110,6 +113,7 @@ export default function BasicMenu({ theme, setTheme }) {
               }}>
               Добавить вопрос
             </MenuItem>
+            <Button color="warning">разгадано слов {point}</Button>
           </Box>
         ) : (
           ""

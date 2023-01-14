@@ -1,70 +1,59 @@
 import axios from "axios";
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
+
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
+
+import { createTheme } from "@mui/system";
+import { db } from "../components/Header/Firebase";
 
 export const quesionContext = React.createContext();
 
-const INIT_STATE = {
-  question: [{ question: "hi", answer: "hi", id: 1 }],
-  newQuesions: null,
-};
-
-function reducer(state = INIT_STATE, action) {
-  switch (action.type) {
-    case "GET_QUESTION":
-      return { ...state, question: action.payload.data };
-    case "EDIT_QUESTION":
-      return { ...state, newQuestions: action.payload };
-    default:
-      return state;
-  }
-}
-
-const API = "http://localhost:8000/quistion";
-
 const QuesionContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, INIT_STATE);
+  const [back, setBack] = useState([{ question: "Hi", answer: "Hi" }]);
 
-  async function createQuestion(newQuestion) {
-    await axios.post(API, newQuestion);
-    getQiestion();
+  const usersCollectionRef = collection(db, "game");
+
+  async function getQuestion() {
+    const data = await getDocs(usersCollectionRef);
+    setBack(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
   }
 
-  async function getQiestion() {
-    const response = await axios(API);
-    dispatch({
-      type: "GET_QUESTION",
-      payload: response,
-    });
-  }
+  useEffect(() => {
+    getQuestion();
+  }, []);
 
-  async function deleteQuestion(id) {
-    await axios.delete(`${API}/${id}`);
-    getQiestion();
-  }
+  const createQuestion = async newQuestion => {
+    await addDoc(usersCollectionRef, newQuestion);
+    getQuestion();
+  };
 
-  async function editQuestion(id) {
-    let res = await axios(`${API}/${id}`);
-    dispatch({
-      type: "EDIT_QUESTION",
-      payload: res.data,
-    });
-  }
+  // const getQuestion = async () => {
+  //   const data = await getDocs(usersCollectionRef);
+  //   setBack(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+  // };
 
-  async function updateQuestion(id, editObj) {
-    await axios.patch(`${API}/${id}`, editObj);
-    getQiestion();
-  }
+  const deleteQuestion = async id => {
+    const userDoc = doc(db, "game", id);
+    await deleteDoc(userDoc);
+    getQuestion(setBack);
+  };
 
   return (
     <quesionContext.Provider
       value={{
-        question: state.question,
-        newQuestion: state.newQuestions,
+        setBack,
+        back,
         createQuestion,
-        getQiestion,
         deleteQuestion,
-        editQuestion,
-        updateQuestion,
+        getQuestion,
+        usersCollectionRef,
       }}>
       {children}
     </quesionContext.Provider>

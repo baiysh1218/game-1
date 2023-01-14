@@ -1,5 +1,11 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  getAuth,
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDJudd0OWhH4T3_-lLn8vdI0XRtAOQE8m4",
@@ -11,12 +17,17 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
+export const db = getFirestore(app);
+
 export const auth = getAuth(app);
 
-const provider = new GoogleAuthProvider();
+const gitHub = new GithubAuthProvider();
+
+//! Goole
 
 export const signInWithGoole = () => {
-  signInWithPopup(auth, provider)
+  signInWithPopup(auth, new GoogleAuthProvider())
     .then(result => {
       const name = result.user.displayName;
       const email = result.user.email;
@@ -30,4 +41,22 @@ export const signInWithGoole = () => {
     .catch(error => {
       console.log(error);
     });
+};
+
+//! gitHub
+
+export const signInWithGitHub = () => {
+  signInWithPopup(auth, gitHub)
+    .then(res => {
+      const name = res.user.displayName;
+      const email = res.user.email;
+      const profilePic = res.user.photoURL;
+      const accessToken = res.user.accessToken;
+
+      localStorage.setItem("name", name);
+      localStorage.setItem("email", email);
+      localStorage.setItem("profilePic", profilePic);
+      localStorage.setItem("access", accessToken);
+    })
+    .catch(e => console.log(e));
 };

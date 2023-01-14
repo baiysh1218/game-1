@@ -8,18 +8,27 @@ import CropSquareIcon from "@mui/icons-material/CropSquare";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Swal from "sweetalert2";
 
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
+
 import "./Question.css";
 import { quesionContext } from "../../../Context/QuesionContext";
 
-const QuestionRandom = ({ props }) => {
-  const { getQiestion } = useContext(quesionContext);
+const QuestionRandom = ({ random }) => {
+  const { getQuestion, setBack, back } = useContext(quesionContext);
   const [answerToQuestion, setAnswerToQuestion] = useState("");
   const [one, setOne] = useState("");
   const [answerArray, setAnswerArray] = useState([]);
 
   const name = localStorage.getItem("name");
 
-  let answer = props.answer;
+  let answer = random.answer;
 
   const Toast = Swal.mixin({
     toast: true,
@@ -34,7 +43,7 @@ const QuestionRandom = ({ props }) => {
   });
 
   function updateQuestion() {
-    getQiestion();
+    getQuestion();
     setAnswerArray([]);
     setOne("");
     setAnswerToQuestion("");
@@ -76,7 +85,7 @@ const QuestionRandom = ({ props }) => {
       answer.split("").toString().toUpperCase()
     ) {
       Swal.fire(`Отличная работа!`, `правильное слово ${answer}`, "success");
-      getQiestion();
+      getQuestion();
       setAnswerArray([]);
     }
 
@@ -86,7 +95,7 @@ const QuestionRandom = ({ props }) => {
   function handleSave1() {
     if (answer.toUpperCase() === answerToQuestion.toUpperCase()) {
       Swal.fire(`Отличная работа!`, `правильное слово ${answer}`, "success");
-      getQiestion();
+      getQuestion();
       setAnswerArray([]);
     }
     if (answer.toUpperCase().search(answerToQuestion.toUpperCase())) {
@@ -96,6 +105,12 @@ const QuestionRandom = ({ props }) => {
         "error"
       );
     }
+    if (!sessionStorage.getItem("point")) {
+      sessionStorage.setItem("point", +1);
+    } else {
+      const point = sessionStorage.getItem("point");
+      sessionStorage.setItem("point", +point + 1);
+    }
 
     setAnswerToQuestion("");
   }
@@ -104,8 +119,10 @@ const QuestionRandom = ({ props }) => {
     <div>
       <div className="modal-question">
         <div className="question-block-answer-length">
-          <h2 className="question-array">{answerArray}</h2>
-          <h4>{answer.length} букв</h4>
+          <h2 className="question-array" style={{ height: "38.391px" }}>
+            {answerArray}
+          </h2>
+          {/* <h4>{answer.length} букв</h4> */}
         </div>
 
         <Button
