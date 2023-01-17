@@ -1,8 +1,11 @@
 import { Button } from "@mui/material";
 import React from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { quesionContext } from "../../Context/QuesionContext";
 
 const Profile = () => {
+  const { setValidLogin } = useContext(quesionContext);
   const imgProfile = localStorage.getItem("profilePic");
   const name = localStorage.getItem("name");
   const email = localStorage.getItem("email");
@@ -11,6 +14,7 @@ const Profile = () => {
 
   function logOut() {
     localStorage.clear();
+    setValidLogin(false);
   }
 
   return (

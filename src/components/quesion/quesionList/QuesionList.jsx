@@ -20,7 +20,6 @@ const QuesionList = () => {
   }
 
   let random = arrayRandElement(back);
-  console.log(random);
 
   const name = localStorage.getItem("name");
 

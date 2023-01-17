@@ -6,17 +6,19 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { useState } from "react";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDJudd0OWhH4T3_-lLn8vdI0XRtAOQE8m4",
-  authDomain: "auth-33803.firebaseapp.com",
-  projectId: "auth-33803",
-  storageBucket: "auth-33803.appspot.com",
-  messagingSenderId: "64615969374",
-  appId: "1:64615969374:web:060977d0c071dbb625bacf",
+  apiKey: "AIzaSyCNU_w3x0uwBqiAm_9dnpC6QlrYJobZ5qI",
+  authDomain: "baiysh-f97cd.firebaseapp.com",
+  projectId: "baiysh-f97cd",
+  storageBucket: "baiysh-f97cd.appspot.com",
+  messagingSenderId: "228782998474",
+  appId: "1:228782998474:web:4fa2fccf14e10555ff0533",
 };
 
 const app = initializeApp(firebaseConfig);
+export default app;
 
 export const db = getFirestore(app);
 

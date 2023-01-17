@@ -26,7 +26,7 @@ const App = () => {
       <BrowserRouter>
         <ThemeProvider theme={darkTheme}>
           <CssBaseline />
-          {<Welcome /> ? <Header theme={theme} setTheme={setTheme} /> : ""}
+          <Header theme={theme} setTheme={setTheme} />
           <Routing />
         </ThemeProvider>
       </BrowserRouter>

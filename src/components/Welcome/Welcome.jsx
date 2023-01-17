@@ -10,8 +10,6 @@ const Welcome = () => {
 
   function valid() {
     if (name == null) {
-      // signInWithGoole();
-      // signInWithGitHub();
       navigate("/Login");
     }
   }

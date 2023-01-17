@@ -1,4 +1,5 @@
-import * as React from "react";
+import React from "react";
+import { useContext } from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -7,8 +8,10 @@ import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/system";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Avatar } from "@mui/material";
+import { quesionContext } from "../../Context/QuesionContext";
 
 export default function BasicMenu({ theme, setTheme }) {
+  const { setValidLogin } = useContext(quesionContext);
   function changeTheme() {
     if (theme === "light") {
       setTheme("dark");
@@ -22,6 +25,7 @@ export default function BasicMenu({ theme, setTheme }) {
 
   function logOut() {
     localStorage.clear();
+    setValidLogin(false);
   }
 
   const navigate = useNavigate();
@@ -112,6 +116,12 @@ export default function BasicMenu({ theme, setTheme }) {
                 navigate("/addquesion");
               }}>
               Добавить вопрос
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                navigate("/Allquestions");
+              }}>
+              Играть
             </MenuItem>
             <Button color="warning">разгадано слов {point}</Button>
           </Box>

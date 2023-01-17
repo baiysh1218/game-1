@@ -16,7 +16,8 @@ import { db } from "../components/Header/Firebase";
 export const quesionContext = React.createContext();
 
 const QuesionContextProvider = ({ children }) => {
-  const [back, setBack] = useState([{ question: "Hi", answer: "Hi" }]);
+  const [back, setBack] = useState([{ question: "Hi", answer: "Hi", id: 1 }]);
+  const [validLogin, setValidLogin] = useState(false);
 
   const usersCollectionRef = collection(db, "game");
 
@@ -34,11 +35,6 @@ const QuesionContextProvider = ({ children }) => {
     getQuestion();
   };
 
-  // const getQuestion = async () => {
-  //   const data = await getDocs(usersCollectionRef);
-  //   setBack(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
-  // };
-
   const deleteQuestion = async id => {
     const userDoc = doc(db, "game", id);
     await deleteDoc(userDoc);
@@ -50,6 +46,7 @@ const QuesionContextProvider = ({ children }) => {
       value={{
         setBack,
         back,
+        setValidLogin,
         createQuestion,
         deleteQuestion,
         getQuestion,

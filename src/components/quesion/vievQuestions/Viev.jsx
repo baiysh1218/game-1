@@ -51,14 +51,6 @@ const Viev = () => {
               }}>
               Удалить
             </Button>
-            <Button
-              style={{ marginTop: "2%" }}
-              variant="contained"
-              color="success"
-              className="btn-vuvu"
-              onClick={() => navigate(`/editQuestion/${item.id}`)}>
-              Изменить
-            </Button>
           </div>
         </div>
       ))}

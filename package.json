@@ -25,6 +25,7 @@
     "react-toastify": "^9.1.1",
     "rebass": "^4.0.7",
     "sweetalert2": "^11.6.7",
+    "uid": "^2.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
