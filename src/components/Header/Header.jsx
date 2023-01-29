@@ -9,9 +9,11 @@ import { Box } from "@mui/system";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Avatar } from "@mui/material";
 import { quesionContext } from "../../Context/QuesionContext";
+import { authContext } from "../../Context/AuthContext";
 
 export default function BasicMenu({ theme, setTheme }) {
   const { setValidLogin } = useContext(quesionContext);
+  const { handleLogout } = useContext(authContext);
   function changeTheme() {
     if (theme === "light") {
       setTheme("dark");
@@ -25,6 +27,8 @@ export default function BasicMenu({ theme, setTheme }) {
 
   function logOut() {
     localStorage.clear();
+    handleLogout();
+
     setValidLogin(false);
   }
 
@@ -53,9 +57,10 @@ export default function BasicMenu({ theme, setTheme }) {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}>
-        {name ? (
+        {email ? (
           <div className="avatar-block">
             <Avatar src={imgProfile} />
+
             <span className="span-avatar">{name}</span>
           </div>
         ) : (
@@ -86,12 +91,22 @@ export default function BasicMenu({ theme, setTheme }) {
             Войти
           </MenuItem>
         )}
-        {name ? (
+        {email ? (
           <MenuItem
             onClick={() => {
               navigate("/my-profile");
             }}>
             Мой Аккаунт
+          </MenuItem>
+        ) : (
+          ""
+        )}
+        {email ? (
+          <MenuItem
+            onClick={() => {
+              navigate("/Allquestions");
+            }}>
+            Играть
           </MenuItem>
         ) : (
           ""
@@ -117,12 +132,7 @@ export default function BasicMenu({ theme, setTheme }) {
               }}>
               Добавить вопрос
             </MenuItem>
-            <MenuItem
-              onClick={() => {
-                navigate("/Allquestions");
-              }}>
-              Играть
-            </MenuItem>
+
             <Button color="warning">разгадано слов {point}</Button>
           </Box>
         ) : (

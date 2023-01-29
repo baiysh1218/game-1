@@ -59,7 +59,7 @@ const QuestionRandom = ({ random }) => {
     if (answer.toUpperCase().search(one.toUpperCase())) {
       Toast.fire({
         icon: "error",
-        title: "К сожедению буква не совподает",
+        title: "К сожедению буква не совпадает",
       });
     }
 
@@ -117,12 +117,13 @@ const QuestionRandom = ({ random }) => {
 
   return (
     <div>
-      <div className="modal-question">
+      <div
+        className="modal-question"
+        style={{ display: "flex", textAlign: "center" }}>
         <div className="question-block-answer-length">
           <h2 className="question-array" style={{ height: "38.391px" }}>
             {answerArray}
           </h2>
-          {/* <h4>{answer.length} букв</h4> */}
         </div>
 
         <Button

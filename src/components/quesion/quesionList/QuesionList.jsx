@@ -22,10 +22,11 @@ const QuesionList = () => {
   let random = arrayRandElement(back);
 
   const name = localStorage.getItem("name");
+  const email = localStorage.getItem("email");
 
   return (
     <div className="que-list">
-      {!name ? (
+      {!email ? (
         <Login />
       ) : (
         <div>
