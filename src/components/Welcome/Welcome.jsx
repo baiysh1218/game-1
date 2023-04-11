@@ -7,22 +7,15 @@ import "./welcome.css";
 const Welcome = () => {
   const navigate = useNavigate();
   const name = localStorage.getItem("name");
+  const email = localStorage.getItem("email");
 
   function valid() {
-    if (name == null) {
-      navigate("/Login");
-    }
+    email ? navigate("/Login") : navigate("/choice");
   }
 
   return (
     <div className="main-walcome">
-      <div
-        className="text"
-        data-text="Welcome"
-        onClick={() => {
-          navigate("/Allquestions");
-          valid();
-        }}>
+      <div className="text" data-text="Welcome" onClick={valid}>
         Welcome
       </div>
     </div>

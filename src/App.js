@@ -29,7 +29,7 @@ const App = () => {
         <BrowserRouter>
           <ThemeProvider theme={darkTheme}>
             <CssBaseline />
-            <Header theme={theme} setTheme={setTheme} />
+            {email && <Header theme={theme} setTheme={setTheme} />}
             <Routing />
           </ThemeProvider>
         </BrowserRouter>

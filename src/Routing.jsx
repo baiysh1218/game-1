@@ -8,6 +8,8 @@ import Viev from "./components/quesion/vievQuestions/Viev";
 import Welcome from "./components/Welcome/Welcome";
 import Login from "./components/Login/Login";
 import SignIn from "./components/Login/SignIn";
+import Choice from "./components/Choice/Choice";
+import Board from "./components/Tictactoe/Board";
 
 const Routing = ({ theme, setTheme }) => {
   return (
@@ -20,6 +22,8 @@ const Routing = ({ theme, setTheme }) => {
       <Route path="/editQuestion/:id" element={<Edit />} />
       <Route path="/Login" element={<Login />} />
       <Route path="/SignIn" element={<SignIn />} />
+      <Route path="/choice" element={<Choice />} />
+      <Route path="/Board" element={<Board />} />
     </Routes>
   );
 };

@@ -101,29 +101,20 @@ const Login = () => {
       <Box style={{ width: "70%" }}>
         <Button
           variant="contained"
-          onClick={() => {
-            validGoole();
-          }}
+          onClick={validGoole}
           style={{ margin: "1%", marginTop: "2%" }}>
           <GoogleIcon /> Google
         </Button>
         <Button
           variant="contained"
-          onClick={() => {
-            validGitHub();
-          }}
+          onClick={validGitHub}
           style={{ margin: "1%", marginTop: "2%" }}>
           <GitHubIcon /> GitHub
         </Button>
         <Box>
           <Typography variant="a">
-            Уже зарегестрированы?{" "}
-            <Button
-              onClick={() => {
-                navigate("/SignIn");
-              }}>
-              Войти в аккаунт
-            </Button>
+            Уже зарегестрированы?
+            <Button onClick={navigate("/SignIn")}>Войти в аккаунт</Button>
           </Typography>
         </Box>
       </Box>

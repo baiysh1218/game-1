@@ -1,0 +1,35 @@
+.square {
+  width: 130px;
+  height: 130px;
+  margin: 5px;
+  border-radius: 5px;
+  border: none;
+  font-size: 80px;
+  font-weight: 500;
+}
+
+.board-row-block {
+  display: flex;
+  justify-content: space-between;
+  align-content: space-between;
+  margin-top: 50px;
+  width: 420px;
+  flex-wrap: wrap;
+}
+
+.block-board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.board-row {
+  display: flex;
+  align-items: center;
+  background-clip: padding-box;
+}
+
+.block-board-child-block {
+  margin-top: 30px;
+}

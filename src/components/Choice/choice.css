@@ -1,0 +1,44 @@
+.tic-tac-toe-block-choice-img:hover {
+  width: 30%;
+  height: 30%;
+  transition: 0.3s;
+}
+
+.tic-tac-toe-block-choice-img {
+  width: 25%;
+  height: 25%;
+  transition: 0.3s;
+}
+.tic-tac-toe-block-choice {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.choice-main-block {
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
+  align-items: center;
+  margin-left: 14%;
+}
+.questions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 400px;
+}
+.question-img:hover {
+  width: 30%;
+  height: 30%;
+  transition: 0.3s;
+}
+.question-img {
+  width: 25%;
+  height: 25%;
+  transition: 0.3s;
+}

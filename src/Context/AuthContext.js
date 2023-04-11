@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import app, { auth } from "../components/Header/Firebase";
 import {
   signInWithEmailAndPassword,
@@ -64,6 +64,7 @@ const AuthContextProvider = ({ children }) => {
 
   const authListener = () => {
     auth.onAuthStateChanged(user => {
+      console.log(user);
       if (user) {
         setUser(user);
       } else {
