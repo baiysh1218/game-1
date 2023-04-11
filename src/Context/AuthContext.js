@@ -33,7 +33,7 @@ const AuthContextProvider = ({ children }) => {
         setUser(userCredential.user);
         localStorage.setItem("email", JSON.stringify(user.email));
         localStorage.setItem("token", JSON.stringify(user.accessToken));
-        navigate("/Allquestions");
+        navigate("/choice");
       })
       .catch(err => {
         switch (err.code) {
@@ -57,7 +57,7 @@ const AuthContextProvider = ({ children }) => {
         localStorage.setItem("email", JSON.stringify(user.email));
         localStorage.setItem("token", JSON.stringify(user.accessToken));
 
-        navigate("/Allquestions");
+        navigate("/choice");
       })
       .catch(err => {
         switch (err.code) {
