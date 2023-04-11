@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { authContext } from "../../Context/AuthContext";
 import "./choice.css";
 
 const Choice = () => {
+  const { user } = useContext(authContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/Login");
+    }
+  }, []);
 
   return (
     <div className="choice-main-block">

@@ -1,60 +1,76 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import app, { auth } from "../components/Header/Firebase";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  getAuth,
 } from "firebase/auth";
 
 export const authContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [hasAccount, setHasAccount] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const [emailValid, setEmailValid] = useState("");
   const [passwordValid, setPasswordValid] = useState("");
 
-  const handleRegister = () => {
-    setErrorMsg("");
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(res => {
-        console.log(res);
+  const [helper, setHelper] = useState(false);
 
-        localStorage.setItem("email", JSON.stringify(res.user.email));
-        if (res.user.displayName !== null || res.user.photoURL !== null) {
-          localStorage.setItem("name", JSON.stringify(res.user.displayName));
-          localStorage.setItem("profilePic", JSON.stringify(res.user.photoURL));
-        }
-        localStorage.setItem("access", JSON.stringify(res.user.accessToken));
+  const auth = getAuth();
+
+  const handleRegister = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(userCredential => {
+        setUser(userCredential.user);
+        localStorage.setItem("email", JSON.stringify(user.email));
+        localStorage.setItem("token", JSON.stringify(user.accessToken));
+        navigate("/Allquestions");
       })
       .catch(err => {
         switch (err.code) {
           case "auth/email-already-in-use":
           case "auth/invalid-email":
-            alert("Вы уже зарегестрировались войдите в аккаунт");
+            setEmailError(err.message);
             break;
+
           case "auth/weak-password":
-            setErrorMsg("Weak password");
+            setPasswordError(err.message);
             break;
         }
-      });
+      })
+      .finally(() => setHelper(!helper));
   };
 
   const handleLogin = () => {
-    setErrorMsg("");
-    signInWithEmailAndPassword(auth, emailValid, passwordValid)
-      .then(res => {
-        console.log(res);
-        localStorage.setItem("access", JSON.stringify(res.user.accessToken));
-        localStorage.setItem("email", JSON.stringify(res.user.email));
+    signInWithEmailAndPassword(auth, email, password)
+      .then(userCredential => {
+        setUser(userCredential.user);
+        localStorage.setItem("email", JSON.stringify(user.email));
+        localStorage.setItem("token", JSON.stringify(user.accessToken));
+
+        navigate("/Allquestions");
       })
       .catch(err => {
-        console.error(err);
+        switch (err.code) {
+          case "auth/user-disabled":
+          case "auth/invalid-email":
+          case "auth/user-not-found":
+            setEmailError(err.message);
+            break;
+
+          case "auth/wrong-password":
+            setPasswordError(err.message);
+            break;
+        }
       });
   };
 
@@ -64,7 +80,6 @@ const AuthContextProvider = ({ children }) => {
 
   const authListener = () => {
     auth.onAuthStateChanged(user => {
-      console.log(user);
       if (user) {
         setUser(user);
       } else {
@@ -72,6 +87,7 @@ const AuthContextProvider = ({ children }) => {
       }
     });
   };
+
   useEffect(() => {
     authListener();
   }, []);

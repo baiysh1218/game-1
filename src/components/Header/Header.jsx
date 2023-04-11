@@ -14,15 +14,10 @@ import { authContext } from "../../Context/AuthContext";
 export default function BasicMenu({ theme, setTheme }) {
   const { setValidLogin } = useContext(quesionContext);
   const { handleLogout } = useContext(authContext);
+
   function changeTheme() {
-    if (theme === "light") {
-      setTheme("dark");
-      // sessionStorage.setItem("theme", "dark");
-    }
-    if (theme === "dark") {
-      setTheme("light");
-      // sessionStorage.setItem("theme", "light");
-    }
+    setTheme(!theme);
+    // sessionStorage.setItem("theme", JSON.stringify(theme));
   }
 
   function logOut() {

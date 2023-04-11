@@ -5,9 +5,16 @@ import { useNavigate } from "react-router-dom";
 import { authContext } from "../../Context/AuthContext";
 
 const SignIn = () => {
-  const { emailValid, setEmailValid, handleLogin, setPasswordValid } =
-    useContext(authContext);
-  const email = localStorage.getItem("email");
+  const {
+    emailValid,
+    setEmailValid,
+    handleLogin,
+    setPasswordValid,
+    setEmail,
+    setPassword,
+  } = useContext(authContext);
+
+  const emailToLocacl = localStorage.getItem("email");
 
   const navigate = useNavigate();
 
@@ -29,18 +36,29 @@ const SignIn = () => {
       }}>
       <Typography variant="h3">SIGN IN</Typography>
       <Typography style={{ marginTop: "2%" }}>Email</Typography>
-      <TextField type="email" onChange={e => setEmailValid(e.target.value)} />
+      <TextField
+        type="email"
+        required
+        id="email"
+        name="email"
+        autoComplete="email"
+        autoFocus
+        onChange={e => setEmail(e.target.value)}
+      />
       <Typography style={{ marginTop: "2%" }}>Password</Typography>
       <TextField
         type="password"
-        onChange={e => setPasswordValid(e.target.value)}
+        required
+        name="password"
+        id="password"
+        autoComplete="current-password"
+        onChange={e => setPassword(e.target.value)}
       />
       <Button
         style={{ marginTop: "2%" }}
         variant="contained"
         onClick={() => {
           handleLogin();
-          navigate("/Allquestions");
         }}>
         Login
       </Button>

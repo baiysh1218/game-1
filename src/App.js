@@ -13,9 +13,9 @@ import app from "./components/Header/Firebase";
 
 const App = () => {
   const [theme, setTheme] = useState("light");
-  const email = localStorage.getItem("email");
+  const email = JSON.parse(localStorage.getItem("email"));
 
-  // const sessionTheme = sessionStorage.getItem("theme");
+  // const theme = JSON.parse(sessionStorage.getItem("theme"));
 
   const darkTheme = createTheme({
     palette: {
@@ -26,13 +26,11 @@ const App = () => {
   return (
     <QuesionContextProvider>
       <AuthContextProvider>
-        <BrowserRouter>
-          <ThemeProvider theme={darkTheme}>
-            <CssBaseline />
-            {email && <Header theme={theme} setTheme={setTheme} />}
-            <Routing />
-          </ThemeProvider>
-        </BrowserRouter>
+        <ThemeProvider theme={darkTheme}>
+          <CssBaseline />
+          <Header theme={theme} setTheme={setTheme} />
+          <Routing />
+        </ThemeProvider>
       </AuthContextProvider>
     </QuesionContextProvider>
   );
