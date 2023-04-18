@@ -14,7 +14,7 @@ const firebaseConfig = {
   projectId: "baiysh-f97cd",
   storageBucket: "baiysh-f97cd.appspot.com",
   messagingSenderId: "228782998474",
-  appId: "1:228782998474:web:4fa2fccf14e10555ff0533",
+  appId: "1:228782998474:web:71370297766f7342ff0533",
 };
 
 const app = initializeApp(firebaseConfig);

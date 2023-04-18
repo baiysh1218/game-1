@@ -21,7 +21,7 @@ const Choice = () => {
           alt=""
           className="question-img"
         />
-        <h5>Поле Чудес</h5>
+        <h5>Угадай слово</h5>
       </div>
       <div
         onClick={() => navigate("/Board")}
