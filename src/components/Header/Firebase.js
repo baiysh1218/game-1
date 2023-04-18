@@ -6,15 +6,14 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import { useState } from "react";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCNU_w3x0uwBqiAm_9dnpC6QlrYJobZ5qI",
-  authDomain: "baiysh-f97cd.firebaseapp.com",
-  projectId: "baiysh-f97cd",
-  storageBucket: "baiysh-f97cd.appspot.com",
-  messagingSenderId: "228782998474",
-  appId: "1:228782998474:web:71370297766f7342ff0533",
+  apiKey: "AIzaSyDN9N5GJWIID9b8YgQ1rpYbc-kTGJqOX5M",
+  authDomain: "authgame-2b102.firebaseapp.com",
+  projectId: "authgame",
+  storageBucket: "authgame.appspot.com",
+  messagingSenderId: "361389657812",
+  appId: "1:361389657812:web:a11b02ca97cffd3b0eb541",
 };
 
 const app = initializeApp(firebaseConfig);
