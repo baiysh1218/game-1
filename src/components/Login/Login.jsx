@@ -7,6 +7,7 @@ import { QueryStartAtConstraint } from "firebase/firestore";
 import { quesionContext } from "../../Context/QuesionContext";
 import { authContext } from "../../Context/AuthContext";
 import { logDOM } from "@testing-library/react";
+import Register from "./Register";
 
 const Login = () => {
   const { setValidLogin } = useContext(quesionContext);
@@ -48,7 +49,13 @@ const Login = () => {
   // }
 
   return (
-    <div className="login__main_block">
+    <div
+      className="login__main_block"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+      }}>
       <Box>
         <Box>
           <Typography variant="h5" style={{ marginBottom: "6%" }}>
@@ -96,6 +103,10 @@ const Login = () => {
             </Button>
           </Box>
         </Box>
+      </Box>
+
+      <Box style={{ marginLeft: "60px" }}>
+        <Register />
       </Box>
 
       <Box>

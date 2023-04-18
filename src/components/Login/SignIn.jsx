@@ -1,8 +1,9 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import React from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../../Context/AuthContext";
+import Register from "./Register";
 
 const SignIn = () => {
   const {
@@ -62,6 +63,14 @@ const SignIn = () => {
         }}>
         Login
       </Button>
+      <Box style={{ marginLeft: "60px" }}>
+        <Register />
+      </Box>
+      <Box>
+        <Typography variant="a">
+          <Button onClick={() => navigate("/Login")}>зарегестрироватся</Button>
+        </Typography>
+      </Box>
     </div>
   );
 };
