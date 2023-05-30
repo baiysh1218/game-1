@@ -26,6 +26,8 @@ const AddQuesion = () => {
       createQuestion(newQuestion);
       navigate("/Allquestions");
     }
+    setQuesion("");
+    setAnswer("");
   }
 
   const newQuestion = { question: question, answer: answer };
@@ -77,7 +79,7 @@ const AddQuesion = () => {
           <Button
             // onClick={() => createQuestion()}
             onClick={() => {
-              createQuestion(newQuestion);
+              handleSave(newQuestion);
             }}
             variant="contained"
             color="success"

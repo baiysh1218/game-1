@@ -13,7 +13,7 @@ import app from "./components/Header/Firebase";
 
 const App = () => {
   const [theme, setTheme] = useState("light");
-  const email = JSON.parse(localStorage.getItem("email"));
+  // const email = JSON.parce.(localStorage.getItem("email"));
 
   // const theme = JSON.parse(sessionStorage.getItem("theme"));
 

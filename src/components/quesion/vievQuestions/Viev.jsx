@@ -25,6 +25,8 @@ const Viev = () => {
     getQuestion(setBack);
   }, []);
 
+  console.log(back);
+
   return (
     <div className="card-block">
       {back.map(item => (
